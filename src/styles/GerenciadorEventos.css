@@ -1,0 +1,53 @@
+.EventosWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.EventosContainer{
+    display: flex;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 14px;
+}
+
+.Container-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+   
+    max-width: 748px;
+    min-width: 300px;
+}
+
+.data-inputs  {
+    display: flex;
+    gap: 18px; 
+  }
+
+  .hora-inputs{
+    display: flex;
+    gap: 18px; 
+  }
+  .criar-evento-form {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .descricaoEventotextarea {
+    width: 100%;
+    height: 61px;
+  }
+
+  .prev-next-button {
+    display: flex;
+    height: 65px;
+    width: -webkit-fill-available;
+  }
+
+  .editar-evento-form {
+    margin: 1.1em;
+  }

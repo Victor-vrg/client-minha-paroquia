@@ -1,0 +1,120 @@
+.admWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 18px;
+}
+
+.admContainer {
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+  max-width: 748px;
+  min-width: 300px;
+  width: 100%;
+}
+
+.tituloForm {
+  padding: 10px;
+}
+.admconteudo {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+.tabela {
+  padding: 10px;
+}
+
+.modal-detalhes-user,
+.editar-servico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  overflow:inherit;
+  margin: 1rem;
+}
+
+.header-detalhe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+.detalhe-container {
+  display: flex;
+  margin: 1rem;
+}
+#t2{
+  margin-right: 24px;
+}
+.detalhes-users {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px  18px;
+}
+
+.detalhes-user{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.editar-servicos {
+  background-color: white;
+  display: flex;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  margin: 24px;
+}
+
+.niveldeacesso {
+  height: 6vh;
+}
+
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding-right: 22px;
+  padding-left: 8px;
+  text-align: left;
+  align-items: center;
+}
+
+@media screen and (max-width: 450px) {
+  .admconteudo {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    overflow-x: auto;
+  }
+  
+}
+.css-79ws1d-MuiModal-root{
+  top: 10px!important;
+  bottom: 10px!important; 
+  overflow: auto;
+  }
+
+.detalhes-serv-comunitario{
+  display: flex;
+    margin-left: 18px;
+    flex-direction: column;
+}
+
+
+.sub-botao{
+  width: 50%;
+}

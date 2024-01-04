@@ -1,0 +1,125 @@
+* {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.carrossel-background {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+.carrossel-container {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 18px;
+  margin-right: 18px;
+  padding-bottom: 40px;
+  padding-top: 10px;
+}
+
+.carrossel-titulo {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 16px;
+  margin-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 14px;
+}
+
+.carrossel-item {
+  display: flex;
+  width: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.carrossel-imagem {
+  width: 50%; 
+  object-fit: cover;
+}
+
+.carrossel-info {
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+
+  width: 50%; 
+}
+
+.carrossel-info p {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.carrossel-info h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.mais-informacoes {
+  font-size: 14px;
+  color: #007bff; 
+  cursor: pointer;
+}
+
+.mais-informacoes:hover {
+  text-decoration: underline;
+}
+
+.carrossel-descricao {
+  display: none;
+  padding-top: 10px;
+  padding-bottom: 16px;
+  font-size: 16px;
+}
+
+.active .carrossel-descricao {
+  display: block;
+}
+
+.participacao-button {
+  margin-top: auto; 
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.participacao-button:hover {
+  background-color: #0056b3;
+}
+@media screen and ( max-width: 450px) {
+  .swiper-button-next, .swiper-button-prev {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 839px) {
+  .carrossel-item {
+    min-height: 400px;
+  }
+  .carrossel-imagem {
+    width: 50%;
+  }
+  .carrossel-info {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 840px) {
+  .carrossel-imagem {
+    width: 50%;
+  }
+  .carrossel-info {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .carrossel-item {
+    height: 380px;
+  }
+}

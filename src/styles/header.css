@@ -1,0 +1,82 @@
+.header {
+  height: 64px;
+  padding-bottom: 10px;
+}
+
+.header-bar {
+  background-color: #007aff; /* Cor de fundo da barra de cabeçalho */
+  padding: 0 14px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinhar os itens na horizontal */
+}
+
+.nome-paroquia {
+  font-size: 24px;
+  line-height: 1.2;
+  color: #333;
+  
+}
+.nome-paroquia-2 {
+  display: flex;
+}
+.botão-de-navegação {
+  margin-left: 16px; 
+  width: auto;
+}
+
+.botão-de-perfil {
+  margin-right: 16px; 
+  width: auto;
+}
+
+/* Estilização para o Drawer (navegação lateral) */
+.MuiDrawer-paper {
+  background-color: #007aff; /* Cor de fundo do Drawer */
+  margin-top: 64px; /* Espaço entre o cabeçalho e o Drawer */
+}
+
+@media screen and ( max-width: 600px) {
+  .MuiDrawer-paper {
+    margin-top: 56px;
+  }
+}
+
+.MuiDrawer-paper .MuiList-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #007aff; /* Cor de fundo do Drawer */
+}
+
+.MuiListItem-button {
+  display: flex;
+  align-items: center;
+  padding: 12px; /* Espaçamento entre os itens do Drawer */
+  width: auto;
+}
+
+.MuiListItem-button + .MuiListItem-button {
+  margin-top: 16px; /* Espaçamento vertical entre os itens */
+}
+
+/* Estilização para os ícones na barra de cabeçalho */
+.MuiIconButton-root {
+  color: white; /* Cor dos ícones */
+}
+
+/* Estilização para os ícones na lista do Drawer */
+.MuiListItemIcon-root {
+  color: white; 
+}
+
+
+.MuiTypography-body1 {
+   /* Cor do texto no Drawer */
+}
+

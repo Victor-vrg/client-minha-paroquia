@@ -1,0 +1,80 @@
+@media (max-width: 600px) {
+  .input-inline {
+      flex-direction: column; /* Coloca os campos um em cima do outro em telas menores */
+  }
+  
+  .input-form,
+  .caixa-de-mensagem {
+      width: 100%; /* Garante que os campos ocupem toda a largura */
+  }
+}
+.feedback-banner {
+  display: none;
+  position: fixed;
+  padding: 100px 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1200;
+  transition: all 0.3s;
+}
+
+.feedback-banner.visible {
+  display: block;
+}
+
+.feedback-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-content {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-inline {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.input-form {
+  flex: 1;
+  margin: 5px;
+  padding: 10px;
+}
+
+.caixa-de-mensagem {
+  width: 100%;
+  margin: 5px;
+  padding: 10px;
+}
+
+.button-form1 {
+  margin: 10px;
+}
