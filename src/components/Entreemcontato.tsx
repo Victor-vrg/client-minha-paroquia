@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ParoquiaModel from "../../../server/src/models/paroquiaModel";
 import '../styles/Entreemcontato.css'
-
+import api from "../apiConfig";
 
 interface EntreEmContatoProps {
   paroquiaSelecionada: ParoquiaModel | null; // Certifique-se de que a paróquia seja passada como prop
 }
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
+
 const EntreEmContato: React.FC<EntreEmContatoProps> = ({
   paroquiaSelecionada,
 }) => {

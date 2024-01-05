@@ -4,11 +4,10 @@ import axios from "axios";
 import Select, { ActionMeta, MultiValue } from "react-select";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import api from "../../apiConfig";
 
 const authToken = sessionStorage.getItem("token");
-const api = axios.create({
-  baseURL: "http://localhost:3001/",
-});
+
 // Função para converter o caminho da imagem
 function convertImageURL(imageURL: string) {
   const match = imageURL.match(/\/d\/(.+?)\//);

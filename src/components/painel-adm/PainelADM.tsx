@@ -5,10 +5,9 @@ import EditarPerfilUsuario from './EdicaoPerfilUsuario';
 import CriarEventos from './CriarEventos';
 import EditarEvento from './EditarEventos';
 import AdministrarUsuarios from './AdministrarUsuarios'
-import axios from 'axios';
 import HeaderADM from './headerADM';
 import AdministrarParoquia from './AdministrarParoquia';
-
+import api from '../../apiConfig';
 interface PainelAdmProps {
   userAccess: { NivelAcessoNoServico: number }[];
   NomeParoquia: string;  
@@ -21,9 +20,7 @@ function PainelAdm({ userAccess, NomeParoquia }: PainelAdmProps) {
     const fetchData = async () => {
       try {
         const authToken = sessionStorage.getItem('token');
-        const api = axios.create({
-          baseURL: 'http://localhost:3001/',
-        });
+        
 
         const servicosComunitariosResponse = await api.get('/role/niveis-abaixode5', {
           headers: {

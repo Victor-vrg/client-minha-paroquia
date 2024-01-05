@@ -1,11 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import '../styles/FeedbackBanner.css';
+import api from "../apiConfig";
 
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
 const FeedbackBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
   const [formData, setFormData] = useState({

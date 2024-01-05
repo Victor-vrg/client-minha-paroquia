@@ -4,12 +4,10 @@ import moment from "moment";
 import Select, { ActionMeta, MultiValue } from "react-select";
 import '../../styles/GerenciadorEventos.css'
 import { useNavigate } from "react-router-dom";
-
+import api from '../../apiConfig';
 
 const authToken = sessionStorage.getItem("token");
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
+
 
 function EditarEvento({ userAccess, servicosComunitarios }: any) {
   const [servicosComunitariosOptions, setServicosComunitariosOptions] = useState([]);

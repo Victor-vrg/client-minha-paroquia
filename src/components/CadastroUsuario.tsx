@@ -4,6 +4,7 @@ import Select, { ActionMeta, MultiValue } from "react-select";
 import { useNavigate } from "react-router-dom";
 import "../styles/cadastroUsuario.css";
 import { ObjectId } from "mongodb";
+import api from "../apiConfig";
 
 function CadastroUsuario() {
   const [dados, setDados] = useState({
@@ -16,9 +17,7 @@ function CadastroUsuario() {
     IDServicoComunitario: [] as unknown as any,
     senha: "",
   });
-  const api = axios.create({
-    baseURL: "http://localhost:3001/",
-  });
+  
 
   const [servicosComunitariosOptions, setServicosComunitariosOptions] =
     useState([]);

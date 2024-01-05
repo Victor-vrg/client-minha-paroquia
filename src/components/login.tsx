@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/login.css';
+import api from "../apiConfig";
 
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
 
 function Login() {
   const [NomeCompleto, setNomeCompleto] = useState('');

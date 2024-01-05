@@ -5,12 +5,11 @@ import Select, { ActionMeta, MultiValue } from 'react-select';
 import '../../styles/cadastroUsuario.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import api from '../../apiConfig';
 
 
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
+
 
 function EditarPerfilUsuario() {
   const [dados, setDados] = useState({

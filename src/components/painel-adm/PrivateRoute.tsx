@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import api from '../../apiConfig';
 interface PrivateRouteProps {
   children: (
     data: {
@@ -15,9 +15,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const authToken = sessionStorage.getItem('token');
   const navigate = useNavigate();
   const [userAccess, setUserAccess] = useState<any[]>([]);
-  const api = axios.create({
-    baseURL: 'http://localhost:3001/',
-  });
+  
 
   useEffect(() => {
     let isMounted = true;

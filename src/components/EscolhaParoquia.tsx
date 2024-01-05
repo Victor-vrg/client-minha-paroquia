@@ -5,15 +5,13 @@ import TextField from '@mui/material/TextField';
 import ParoquiaModel from '../../../server/src/models/paroquiaModel';
 import { useNavigate } from 'react-router-dom'; // Importe o useNavigate
 import '../styles/minha-paroquia.css';
-
+import api from "../apiConfig";
 
 interface EscolhaParoquiaProps {
   setParoquiaSelecionada: React.Dispatch<React.SetStateAction<ParoquiaModel | null>>;
 }
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
+
 
 const EscolhaParoquia: React.FC<EscolhaParoquiaProps> = ({ setParoquiaSelecionada }) => {
   const [paroquias, setParoquias] = useState<ParoquiaModel[]>([]);

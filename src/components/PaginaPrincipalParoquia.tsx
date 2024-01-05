@@ -11,7 +11,7 @@ import ParoquiaModel from '../../../server/src/models/paroquiaModel';
 import EventosModel from '../../../server/src/models/eventosModel';
 import ExcursaoModel from '../../../server/src/models/ExcursaoModel';
 import NavigationBar from './NavigationBar'; 
-
+import api from "../apiConfig";
 
 
 interface PaginaPrincipalParoquiaProps {
@@ -19,9 +19,7 @@ interface PaginaPrincipalParoquiaProps {
   isFielDesconhecido: boolean;
 }
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
+
 
 const PaginaPrincipalParoquia: React.FC<PaginaPrincipalParoquiaProps> = ({ paroquiaSelecionada}) => {
   const [eventos, setEventos] = useState<EventosModel[]>([]);

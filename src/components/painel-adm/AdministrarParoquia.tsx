@@ -1,74 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Select from "react-select";
 import "../../styles/AdmParoquia.css";
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
+import apiUrl from "../../apiConfig";
 
 
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/',
-});
 const authToken = sessionStorage.getItem("token");
 
 interface ParoquiaModel {
-    _id: ObjectId | string;
-    NomeParoquia: string;
-    Padres: string;
-    CEP: string;
-    LocalizacaoParoquia: string;
-    Bairro: string;
-    InformacoesAdicionais: string;
-    EmailResponsavel: string;
-  }
-  
-  function AdministrarParoquia() {
-    const [paroquiaDados, setParoquiaDados] = useState<ParoquiaModel>({
-      _id: '',
-      NomeParoquia: '',
-      Padres: '',
-      CEP: '',
-      LocalizacaoParoquia: '',
-      Bairro: '',
-      InformacoesAdicionais: '',
-      EmailResponsavel: '',
-    });
-  
-   
-    useEffect(() => {
-        const fetchParoquiaData = async () => {
-          try {
-        
-            const response = await api.get('/api/paroquia-mais-frequentada', {
-              headers: {
-                Authorization: authToken,
-              },
-            });
-            setParoquiaDados(response.data);
-          } catch (error) {
-            console.error('Erro ao buscar dados da paróquia', error);
-          }
-        };
-    
-        fetchParoquiaData();
-      }, []); // O segundo argumento vazio faz com que este useEffect execute apenas uma vez
-    
-      const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-    
-        try {
-         
-          await api.patch('/api/paroquias/:id', paroquiaDados, {
-            headers: {
-              Authorization: authToken,
-            },
-          });
-          alert('Alterações salvas com sucesso!');
-        } catch (error) {
-          console.error('Erro ao salvar alterações', error);
-          alert('Erro ao salvar alterações. Verifique o console para mais detalhes.');
-        }
-      };
+  _id: ObjectId | string;
+  NomeParoquia: string;
+  Padres: string;
+  CEP: string;
+  LocalizacaoParoquia: string;
+  Bairro: string;
+  InformacoesAdicionais: string;
+  EmailResponsavel: string;
+}
+
+function AdministrarParoquia() {
+  const [paroquiaDados, setParoquiaDados] = useState<ParoquiaModel>({
+    _id: "",
+    NomeParoquia: "",
+    Padres: "",
+    CEP: "",
+    LocalizacaoParoquia: "",
+    Bairro: "",
+    InformacoesAdicionais: "",
+    EmailResponsavel: "",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setParoquiaDados((prevParoquia) => ({
+      ...prevParoquia,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const fetchParoquiaData = async () => {
+      try {
+        const response = await apiUrl.get("/api/paroquia-mais-frequentada", {
+          headers: {
+            Authorization: authToken,
+          },
+        });
+        setParoquiaDados(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar dados da paróquia", error);
+      }
+    };
+
+    fetchParoquiaData();
+  }, []); // O segundo argumento vazio faz com que este useEffect execute apenas uma vez
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await apiUrl.patch("/api/paroquias/:id", paroquiaDados, {
+        headers: {
+          Authorization: authToken,
+        },
+      });
+      alert("Alterações salvas com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar alterações", error);
+      alert(
+        "Erro ao salvar alterações. Verifique o console para mais detalhes."
+      );
+    }
+  };
 
   return (
     <div className="administrar-paroquia">
@@ -83,19 +90,18 @@ interface ParoquiaModel {
               id="NomeParoquia"
               name="NomeParoquia"
               value={paroquiaDados.NomeParoquia}
-            
               required
+              onChange={handleInputChange}
             />
 
             <label htmlFor="Padres">Padres:</label>
-            <Select
-              className="select-input"
-           
+            <input
+              id="Padres"
+              name="Padres"
               value={paroquiaDados.Padres}
-             
-              isMulti
-              isSearchable
-              placeholder="Selecione o(s) padre(s)"
+              placeholder="Escreva o nome do(s) padre(s)"
+              required
+              onChange={handleInputChange}
             />
 
             <label htmlFor="CEP">CEP:</label>
@@ -104,18 +110,20 @@ interface ParoquiaModel {
               id="CEP"
               name="CEP"
               value={paroquiaDados.CEP}
-           
               required
+              onChange={handleInputChange}
             />
 
-            <label htmlFor="LocalizacaoParoquia">Localização da Paróquia:</label>
+            <label htmlFor="LocalizacaoParoquia">
+              Localização da Paróquia:
+            </label>
             <input
               type="text"
               id="LocalizacaoParoquia"
               name="LocalizacaoParoquia"
               value={paroquiaDados.LocalizacaoParoquia}
-              
               required
+              onChange={handleInputChange}
             />
 
             <label htmlFor="Bairro">Bairro:</label>
@@ -124,16 +132,20 @@ interface ParoquiaModel {
               id="Bairro"
               name="Bairro"
               value={paroquiaDados.Bairro}
-            
               required
+              onChange={handleInputChange}
             />
 
-            <label htmlFor="InformacoesAdicionais">Informações Adicionais:</label>
+            <label htmlFor="InformacoesAdicionais">
+              Informações Adicionais:
+            </label>
             <textarea
+              rows={5}
+              cols={40}
               id="InformacoesAdicionais"
               name="InformacoesAdicionais"
               value={paroquiaDados.InformacoesAdicionais}
-         
+              onChange={handleInputChange}
             />
 
             <label htmlFor="EmailResponsavel">Email do Responsável:</label>
@@ -142,8 +154,8 @@ interface ParoquiaModel {
               id="EmailResponsavel"
               name="EmailResponsavel"
               value={paroquiaDados.EmailResponsavel}
-          
               required
+              onChange={handleInputChange}
             />
 
             <button type="submit">Salvar Alterações</button>

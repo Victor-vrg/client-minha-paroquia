@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
+import api from "../apiConfig";
 function RecuperacaoSenha() {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
@@ -15,9 +15,7 @@ function RecuperacaoSenha() {
 const [tokenError, setTokenError] = useState('');
 const [senhaError, setSenhaError] = useState('');
   const navigate = useNavigate();
-  const api = axios.create({
-     baseURL: 'http://localhost:3001/',
-  });
+ 
   const handleEnviarEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     
