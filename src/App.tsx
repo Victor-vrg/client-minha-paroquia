@@ -4,13 +4,22 @@ import Login from "./components/login";
 import EscolhaParoquia from "./components/EscolhaParoquia";
 import PaginaPrincipalParoquia from "./components/PaginaPrincipalParoquia";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import ParoquiaModel from "../../server/src/models/paroquiaModel";
 import CadastroUsuario from "./components/CadastroUsuario";
 import RecuperacaoSenha from "./components/RecuperacaoSenha";
 import PainelAdm from "./components/painel-adm/PainelADM";
 import PrivateRoute from "./components/painel-adm/PrivateRoute";
 import CriarEventos from "./components/painel-adm/CriarEventos";
-
+import { ObjectId } from "mongodb";
+interface ParoquiaModel {
+  _id: ObjectId;
+  NomeParoquia: string;
+  Padres: string;
+  CEP: string;
+  LocalizacaoParoquia: string;
+  Bairro: string;
+  InformacoesAdicionais: string;
+  EmailResponsavel: string;
+}
 function App() {
   const [paroquiaSelecionada, setParoquiaSelecionada] =
     useState<ParoquiaModel | null>(null);

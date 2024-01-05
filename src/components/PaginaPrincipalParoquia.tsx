@@ -7,13 +7,54 @@ import Carrossel from '../components/Carrossel';
 import CarrosselExcursao from '../components/CarrosselExcursao';  
 import EntreEmContato from '../components/Entreemcontato';
 import FeedbackBanner from '../components/feedbackBanner';
-import ParoquiaModel from '../../../server/src/models/paroquiaModel';
-import EventosModel from '../../../server/src/models/eventosModel';
-import ExcursaoModel from '../../../server/src/models/ExcursaoModel';
+
 import NavigationBar from './NavigationBar'; 
 import api from "../apiConfig";
+import { ObjectId } from 'mongodb';
 
+interface ParoquiaModel {
+  _id: ObjectId;
+  NomeParoquia: string;
+  Padres: string;
+  CEP: string;
+  LocalizacaoParoquia: string;
+  Bairro: string;
+  InformacoesAdicionais: string;
+  EmailResponsavel: string;
+}
 
+interface EventosModel {
+  _id: ObjectId | any ; 
+  NomeEvento: string;
+  DataInicio: Date | string;
+  DataFim: Date | string;
+  HoraInicio: string ;
+  HoraFim: string;
+  LocalizacaoEvento: string;
+  DescricaoEvento: string;
+  CaminhoImagem: string;
+  TipoEvento: string;
+  Destaque: boolean ;
+  Ocultar:   boolean | Number;
+  ParoquiaID: string | ObjectId;
+  IDServicoComunitario?: string[]; 
+}
+interface ExcursaoModel {
+  _id: ObjectId;
+  NomeExcursao: string;
+  DataInicioExcursao: Date;
+  DataFimExcursao: Date;
+  HoraInicioExcursao: string;
+  HoraFimExcursao: string;
+  LocalizacaoExcursao: string;
+  DescricaoExcursao: string;
+  CaminhoImagem: string;
+  PrecoExcursao: number;
+  VagasExcursao: number;
+  ParoquiaID:  ObjectId | null;
+  Ocultar: number;
+  Destaque: number;
+}
 interface PaginaPrincipalParoquiaProps {
   paroquiaSelecionada: ParoquiaModel | null;
   isFielDesconhecido: boolean;

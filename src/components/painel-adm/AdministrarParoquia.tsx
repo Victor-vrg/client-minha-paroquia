@@ -3,7 +3,7 @@ import axios from "axios";
 import Select from "react-select";
 import "../../styles/AdmParoquia.css";
 import { ObjectId } from "mongodb";
-import apiUrl from "../../apiConfig";
+import api from "../../apiConfig";
 
 
 
@@ -45,7 +45,7 @@ function AdministrarParoquia() {
   useEffect(() => {
     const fetchParoquiaData = async () => {
       try {
-        const response = await apiUrl.get("/api/paroquia-mais-frequentada", {
+        const response = await api.get("/api/paroquia-mais-frequentada", {
           headers: {
             Authorization: authToken,
           },
@@ -63,7 +63,7 @@ function AdministrarParoquia() {
     e.preventDefault();
 
     try {
-      await apiUrl.patch("/api/paroquias/:id", paroquiaDados, {
+      await api.patch("/api/paroquias/:id", paroquiaDados, {
         headers: {
           Authorization: authToken,
         },

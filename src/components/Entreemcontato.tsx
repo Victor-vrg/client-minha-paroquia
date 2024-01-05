@@ -1,9 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import ParoquiaModel from "../../../server/src/models/paroquiaModel";
 import '../styles/Entreemcontato.css'
 import api from "../apiConfig";
+import { ObjectId } from "mongodb";
 
+
+interface ParoquiaModel {
+  _id: ObjectId;
+  NomeParoquia: string;
+  Padres: string;
+  CEP: string;
+  LocalizacaoParoquia: string;
+  Bairro: string;
+  InformacoesAdicionais: string;
+  EmailResponsavel: string;
+}
 interface EntreEmContatoProps {
   paroquiaSelecionada: ParoquiaModel | null; // Certifique-se de que a paróquia seja passada como prop
 }

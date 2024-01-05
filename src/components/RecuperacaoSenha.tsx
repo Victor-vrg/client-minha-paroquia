@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import api from "../apiConfig";
+
 function RecuperacaoSenha() {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');

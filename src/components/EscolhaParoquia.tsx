@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import ParoquiaModel from '../../../server/src/models/paroquiaModel';
 import { useNavigate } from 'react-router-dom'; // Importe o useNavigate
 import '../styles/minha-paroquia.css';
 import api from "../apiConfig";
-
+import { ObjectId } from 'mongodb';
+interface ParoquiaModel {
+  _id: ObjectId;
+  NomeParoquia: string;
+  Padres: string;
+  CEP: string;
+  LocalizacaoParoquia: string;
+  Bairro: string;
+  InformacoesAdicionais: string;
+  EmailResponsavel: string;
+}
 interface EscolhaParoquiaProps {
   setParoquiaSelecionada: React.Dispatch<React.SetStateAction<ParoquiaModel | null>>;
 }
