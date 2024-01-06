@@ -8,6 +8,9 @@ import AdministrarUsuarios from './AdministrarUsuarios'
 import HeaderADM from './headerADM';
 import AdministrarParoquia from './AdministrarParoquia';
 import api from '../../apiConfig';
+
+
+const authToken = sessionStorage.getItem('token');
 interface PainelAdmProps {
   userAccess: { NivelAcessoNoServico: number }[];
   NomeParoquia: string;  
@@ -19,7 +22,7 @@ function PainelAdm({ userAccess, NomeParoquia }: PainelAdmProps) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const authToken = sessionStorage.getItem('token');
+        
         
 
         const servicosComunitariosResponse = await api.get('/role/niveis-abaixode5', {
@@ -49,6 +52,7 @@ function PainelAdm({ userAccess, NomeParoquia }: PainelAdmProps) {
   return (
     <div style={painelAdmStyle}>
        <HeaderADM nomeParoquia={NomeParoquia} />
+       <EditarPerfilUsuario />
        <PermissaoComponent requiredAccessLevel={5} userAccess={userAccess}>
         <AdministrarUsuarios servicosComunitarios={servicosComunitarios} />
       </PermissaoComponent>

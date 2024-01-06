@@ -27,6 +27,10 @@ const HeaderADM: React.FC<HeaderProps> = ({ nomeParoquia }) => {
     setAnchorEl(null);
   };
 
+  const voltarPaginaPrincipal = () => {
+    navigate("/pagina-principal-paroquia");
+  };
+
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     navigate("/login");
@@ -36,8 +40,8 @@ const HeaderADM: React.FC<HeaderProps> = ({ nomeParoquia }) => {
     <div className="header">
       <AppBar className="header-bar">
         <Toolbar className="toolbar">
-          <Typography className="nome-paroquia-2" variant="h6">
-            {nomeParoquia}
+          <Typography className="nome-paroquia-2"  variant="h6">
+      Painel Administrativo
           </Typography>
           <div className="spacer" />
           <IconButton
@@ -53,6 +57,7 @@ const HeaderADM: React.FC<HeaderProps> = ({ nomeParoquia }) => {
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
           >
+            <MenuItem onClick={voltarPaginaPrincipal}>Voltar Página Principal</MenuItem>
             <MenuItem onClick={handleLogout}>Sair</MenuItem>
           </Menu>
         </Toolbar>

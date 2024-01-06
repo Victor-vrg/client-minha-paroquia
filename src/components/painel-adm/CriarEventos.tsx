@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/GerenciadorEventos.css";
-import axios from "axios";
 import Select, { ActionMeta, MultiValue } from "react-select";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -10,12 +9,22 @@ const authToken = sessionStorage.getItem("token");
 
 // Função para converter o caminho da imagem
 function convertImageURL(imageURL: string) {
+  // Verifica se o URL é um link do Google Drive
+  const isDriveLink = /drive\.google\.com\/uc\?id=/.test(imageURL);
+
+  if (isDriveLink) {
+    return imageURL; // Se já for um link do Google Drive, retorna como está
+  }
+
+  // Verifica se o URL corresponde ao padrão para extrair o ID do arquivo de um link compartilhado do Google Drive
   const match = imageURL.match(/\/d\/(.+?)\//);
+
   if (match && match[1]) {
     const fileId = match[1];
     return `https://drive.google.com/uc?id=${fileId}`;
   }
-  return imageURL;
+
+  return imageURL; // Retorna o URL original se não for um link do Google Drive
 }
 
 function CriarEventos({ userAccess, servicosComunitarios }: any) {

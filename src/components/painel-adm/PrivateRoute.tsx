@@ -1,6 +1,5 @@
 import React, { useEffect, useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import api from '../../apiConfig';
 interface PrivateRouteProps {
   children: (

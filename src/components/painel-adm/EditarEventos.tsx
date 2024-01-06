@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import moment from "moment";
 import Select, { ActionMeta, MultiValue } from "react-select";
 import '../../styles/GerenciadorEventos.css'

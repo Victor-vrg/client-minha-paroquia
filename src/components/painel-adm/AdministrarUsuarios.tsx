@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Modal from "@mui/material/Modal";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { ObjectId } from "mongodb";
 import "../../styles/AdmUser.css";
-
+import api from "../../apiConfig";
 interface Usuario {
   _id: ObjectId;
   NomeCompleto: string;
@@ -29,9 +28,7 @@ interface AdministrarUsuariosProps {
   servicosComunitarios: ServicoComunitarioModel[];
 }
 
-const api = axios.create({
-  baseURL: "http://localhost:3001/",
-});
+
 const authToken = sessionStorage.getItem("token");
 
 const AdministrarUsuarios: React.FC<AdministrarUsuariosProps> = ({

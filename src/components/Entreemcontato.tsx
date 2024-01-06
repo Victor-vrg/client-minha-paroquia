@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import '../styles/Entreemcontato.css'
 import api from "../apiConfig";
 import { ObjectId } from "mongodb";

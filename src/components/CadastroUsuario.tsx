@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Select, { ActionMeta, MultiValue } from "react-select";
 import { useNavigate } from "react-router-dom";
 import "../styles/cadastroUsuario.css";
