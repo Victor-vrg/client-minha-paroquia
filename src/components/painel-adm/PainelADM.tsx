@@ -1,16 +1,16 @@
-// PainelAdm.jsx
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import PermissaoComponent from './PermissaoComponent';
-import EditarPerfilUsuario from './EdicaoPerfilUsuario';
-import CriarEventos from './CriarEventos';
-import EditarEvento from './EditarEventos';
-import AdministrarUsuarios from './AdministrarUsuarios'
-import HeaderADM from './headerADM';
-import AdministrarParoquia from './AdministrarParoquia';
 import api from '../../apiConfig';
 
-
 const authToken = sessionStorage.getItem('token');
+
+const HeaderADM = lazy(() => import('./headerADM'));
+const AdministrarUsuarios = lazy(() => import('./AdministrarUsuarios'));
+const AdministrarParoquia = lazy(() => import('./AdministrarParoquia'));
+const EditarPerfilUsuario = lazy(() => import('./EdicaoPerfilUsuario'));
+const CriarEventos = lazy(() => import('./CriarEventos'));
+const CriarExcursao = lazy(() => import('./CriarExcursao'));
+const EditarEvento = lazy(() => import('./EditarEventos'));
 interface PainelAdmProps {
   userAccess: { NivelAcessoNoServico: number }[];
   NomeParoquia: string;  
@@ -22,17 +22,14 @@ function PainelAdm({ userAccess, NomeParoquia }: PainelAdmProps) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        
-        
-
         const servicosComunitariosResponse = await api.get('/role/niveis-abaixode5', {
           headers: {
             Authorization: authToken,
           },
         });
 
-        setServicosComunitarios(servicosComunitariosResponse.data);
-        setCarregando(false);
+          setServicosComunitarios(servicosComunitariosResponse.data);
+          setCarregando(false);
       } catch (error) {
         console.error('Erro ao obter dados:', error);
       }
@@ -51,25 +48,29 @@ function PainelAdm({ userAccess, NomeParoquia }: PainelAdmProps) {
 
   return (
     <div style={painelAdmStyle}>
-       <HeaderADM nomeParoquia={NomeParoquia} />
-       <EditarPerfilUsuario />
-       <PermissaoComponent requiredAccessLevel={5} userAccess={userAccess}>
-        <AdministrarUsuarios servicosComunitarios={servicosComunitarios} />
-      </PermissaoComponent>
-      <PermissaoComponent requiredAccessLevel={5} userAccess={userAccess}>
-        <AdministrarParoquia />
-      </PermissaoComponent>
-      <PermissaoComponent requiredAccessLevel={5} userAccess={userAccess}>
-        <EditarPerfilUsuario />
-      </PermissaoComponent>
-      <PermissaoComponent requiredAccessLevel={4} userAccess={userAccess}>
-        <CriarEventos userAccess={userAccess} servicosComunitarios={servicosComunitarios} />
-      </PermissaoComponent>
-      <PermissaoComponent requiredAccessLevel={4} userAccess={userAccess}>
-  <EditarEvento userAccess={userAccess} servicosComunitarios={servicosComunitarios} />
-</PermissaoComponent>
+      <Suspense fallback={<div>Carregando...</div>}>
+        <HeaderADM nomeParoquia={NomeParoquia} />
+        <PermissaoComponent requiredAccessLevel={3} userAccess={userAccess}>
+          <AdministrarUsuarios servicosComunitarios={servicosComunitarios} />
+        </PermissaoComponent>
+        <PermissaoComponent requiredAccessLevel={3} userAccess={userAccess}>
+          <AdministrarParoquia />
+        </PermissaoComponent>
+        <PermissaoComponent requiredAccessLevel={6} userAccess={userAccess}>
+          <EditarPerfilUsuario />
+        </PermissaoComponent>
+        <PermissaoComponent requiredAccessLevel={4} userAccess={userAccess}>
+          <CriarEventos userAccess={userAccess} servicosComunitarios={servicosComunitarios} />
+        </PermissaoComponent>
+        <PermissaoComponent requiredAccessLevel={5} userAccess={userAccess}>
+          <CriarExcursao userAccess={userAccess} servicosComunitarios={servicosComunitarios} />
+        </PermissaoComponent>
+        <PermissaoComponent requiredAccessLevel={4} userAccess={userAccess}>
+          <EditarEvento userAccess={userAccess} servicosComunitarios={servicosComunitarios} />
+        </PermissaoComponent>
+      </Suspense>
     </div>
   );
-}
+};
 
 export default PainelAdm;

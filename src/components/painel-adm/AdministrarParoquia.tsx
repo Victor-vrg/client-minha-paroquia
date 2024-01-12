@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 import "../../styles/AdmParoquia.css";
 import { ObjectId } from "mongodb";
 import api from "../../apiConfig";
-
 
 
 const authToken = sessionStorage.getItem("token");
@@ -139,8 +137,7 @@ function AdministrarParoquia() {
               Informações Adicionais:
             </label>
             <textarea
-              rows={5}
-              cols={40}
+              className="descricaoPersonalizadatextarea"
               id="InformacoesAdicionais"
               name="InformacoesAdicionais"
               value={paroquiaDados.InformacoesAdicionais}

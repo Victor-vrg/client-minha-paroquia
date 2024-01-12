@@ -157,8 +157,8 @@ function CriarEventos({ userAccess, servicosComunitarios }: any) {
 
   return (
     <div className="EventosWrapper">
-      <div className="EventosContainer">
-        <div className="Container-form">
+      <div className="cadastro-container">
+        <div className="cadastro-central">
           <h2>Criar um Novo Evento</h2>
           <form className="criar-evento-form" onSubmit={handleSubmit}>
             <div>
@@ -227,7 +227,7 @@ function CriarEventos({ userAccess, servicosComunitarios }: any) {
             <div>
               <label>Descrição do Evento:</label>
               <textarea
-                className="descricaoEventotextarea"
+                className="descricaoPersonalizadatextarea"
                 value={evento.DescricaoEvento}
                 name="DescricaoEvento"
                 placeholder="Insira detalhes, para melhor divulgação como instagram, roteiro"

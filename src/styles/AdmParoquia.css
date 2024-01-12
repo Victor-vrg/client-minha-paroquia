@@ -1,4 +1,6 @@
-.administrar-paroquia{
+.administrar-paroquia,
+.EventosWrapper,
+.administrar-excursao{
     display: flex;
     justify-content: center;
     margin: 20px 18px;

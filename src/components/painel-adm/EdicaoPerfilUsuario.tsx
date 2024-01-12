@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import Select, { ActionMeta, MultiValue } from 'react-select';
-import '../../styles/cadastroUsuario.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import api from '../../apiConfig';
-
-
-
-
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Select, { ActionMeta, MultiValue } from "react-select";
+import "../../styles/cadastroUsuario.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import api from "../../apiConfig";
 
 function EditarPerfilUsuario() {
   const [dados, setDados] = useState({
-    NomeCompleto: '',
-    Email: '',
-    Telefone: '',
-    ServicosComunitario: '',
-    Bairro: '',
-    ParoquiaMaisFrequentada: '',
-    DataNascimento: '',
+    NomeCompleto: "",
+    Email: "",
+    Telefone: "",
+    ServicosComunitario: "",
+    Bairro: "",
+    ParoquiaMaisFrequentada: "",
+    DataNascimento: "",
     IDServicoComunitario: [] as any[],
   });
 
-  const [novaSenha, setNovaSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
-  const [senhaError, setSenhaError] = useState('');
+  const [novaSenha, setNovaSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [senhaError, setSenhaError] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
-  const [servicosComunitariosOptions, setServicosComunitariosOptions] = useState<any[]>([]);
-  const [selectedServicosComunitarios, setSelectedServicosComunitarios] = useState<MultiValue<any>>([]);
-  const [paroquiaOptions, setParoquiaOptions] = useState<{ value: number; label: string }[]>([]);
+  const [servicosComunitariosOptions, setServicosComunitariosOptions] =
+    useState<any[]>([]);
+  const [selectedServicosComunitarios, setSelectedServicosComunitarios] =
+    useState<MultiValue<any>>([]);
+  const [paroquiaOptions, setParoquiaOptions] = useState<
+    { value: number; label: string }[]
+  >([]);
+  const [servicosComunitariosUsuario, setServicosComunitariosUsuario] =
+    useState<any[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,8 +39,7 @@ function EditarPerfilUsuario() {
   };
 
   const handleParoquiaInputChange = (inputValue: string) => {
-    // Atualizar as opções de paróquias com base no texto de entrada
-    if (inputValue.trim() === '') {
+    if (inputValue.trim() === "") {
       setParoquiaOptions([]);
     } else {
       fetchParoquias(inputValue);
@@ -47,14 +48,14 @@ function EditarPerfilUsuario() {
 
   const fetchServicosComunitarios = async () => {
     try {
-      const response = await api.get('/usuarios/servicos-comunitarios');
+      const response = await api.get("/usuarios/servicos-comunitarios");
       const options = response.data.map((servicoComunitario: any) => ({
         value: servicoComunitario._id,
         label: servicoComunitario.nomeServicoComunitario,
       }));
       setServicosComunitariosOptions(options);
     } catch (error) {
-      console.error('Erro ao buscar serviços comunitários:', error);
+      console.error("Erro ao buscar serviços comunitários:", error);
     }
   };
 
@@ -67,15 +68,15 @@ function EditarPerfilUsuario() {
       }));
       setParoquiaOptions(options);
     } catch (error) {
-      console.error('Erro ao buscar sugestões de paróquias:', error);
+      console.error("Erro ao buscar sugestões de paróquias:", error);
     }
   };
 
   const fetchUserData = async () => {
     try {
-      const response = await api.get('/usuarios/usuario-logado', {
+      const response = await api.get("/usuarios/usuario-logado", {
         headers: {
-          Authorization: authToken, 
+          Authorization: authToken,
         },
       });
       const userData = response.data;
@@ -89,38 +90,50 @@ function EditarPerfilUsuario() {
         ServicosComunitario: userData.ServicosComunitario,
         IDServicoComunitario: userData.idServicoComunitario,
       });
-    } 
-    catch (error) {
-      console.error('Erro ao buscar dados do usuário:', error);
+
+      // Preencher as opções de paróquias
+      const paroquiaOption = {
+        value: userData.idParoquiaMaisFrequentada,
+        label: userData.paroquiaMaisFrequentada,
+      };
+      setParoquiaOptions([paroquiaOption]);
+
+      // Preencher os serviços comunitários do usuário
+      setServicosComunitariosUsuario(userData.idServicoComunitario);
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
     }
   };
-  // falta implementar preechimento automatico da paroquia do usuario e de seus serviços-comunitarios que ja tem cadastr!!
 
   const location = useLocation();
   const { authToken } = location.state;
-  console.log('Token enviado na requisição:', authToken);
 
   useEffect(() => {
     fetchUserData();
-    fetchServicosComunitarios(); 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authToken]);
-  
+    fetchServicosComunitarios();
+  }, []);
+
+  useEffect(() => {
+    const selectedOptions = servicosComunitariosOptions.filter((option) =>
+      servicosComunitariosUsuario.includes(option.value)
+    );
+    setSelectedServicosComunitarios(selectedOptions);
+  }, [servicosComunitariosOptions, servicosComunitariosUsuario]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const today = new Date().toISOString().split("T")[0];
     if (dados.DataNascimento > today) {
-      alert('A data de nascimento não pode ser no futuro.');
+      alert("A data de nascimento não pode ser no futuro.");
       return;
     }
-  
+
     if (novaSenha !== confirmarSenha) {
-      setSenhaError('As senhas não coincidem');
+      setSenhaError("As senhas não coincidem");
       return;
     }
-  
+
     try {
       const data = {
         NomeCompleto: dados.NomeCompleto,
@@ -129,25 +142,26 @@ function EditarPerfilUsuario() {
         Bairro: dados.Bairro,
         ParoquiaMaisFrequentada: dados.ParoquiaMaisFrequentada,
         DataNascimento: dados.DataNascimento,
-        IDServicoComunitario: selectedServicosComunitarios.map((option) => option.value),
-        NovaSenha: '',
+        IDServicoComunitario: selectedServicosComunitarios.map(
+          (option) => option.value
+        ),
+        NovaSenha: "",
       };
-  
+
       if (novaSenha) {
         data.NovaSenha = novaSenha;
       }
-  
-      const response = await api.put('/usuarios/editar-perfil', data, {
+
+      const response = await api.put("/usuarios/editar-perfil", data, {
         headers: {
-          Authorization: authToken, 
+          Authorization: authToken,
         },
       });
-      console.log('Resposta do servidor:', response.data);
+      console.log("Resposta do servidor:", response.data);
     } catch (error) {
-      console.error('Erro ao editar perfil:', error);
+      console.error("Erro ao editar perfil:", error);
     }
   };
-  
 
   return (
     <div className="editar-perfil-user">
@@ -186,14 +200,22 @@ function EditarPerfilUsuario() {
               required
             />
 
-            <label htmlFor="ParoquiaMaisFrequentada">Paróquia mais Frequentada:</label>
+            <label htmlFor="ParoquiaMaisFrequentada"> Paróquia mais Frequentada:</label>
             <Select
-              className="select-input"
+              id="ParoquiaMaisFrequentada"
+              name="ParoquiaMaisFrequentada"
               options={paroquiaOptions}
               onInputChange={handleParoquiaInputChange}
-              value={paroquiaOptions.find((option) => option.label === dados.ParoquiaMaisFrequentada)}
+              value={paroquiaOptions.find(
+                (option) => option.label === dados.ParoquiaMaisFrequentada
+              )}
               onChange={(selectedOption) => {
-                setDados({ ...dados, ParoquiaMaisFrequentada: selectedOption ? selectedOption.label : '' });
+                setDados({
+                  ...dados,
+                  ParoquiaMaisFrequentada: selectedOption
+                    ? selectedOption.label
+                    : "",
+                });
               }}
               isSearchable
               placeholder="Digite o nome da paróquia"
@@ -214,68 +236,71 @@ function EditarPerfilUsuario() {
               className="select-input"
               options={servicosComunitariosOptions}
               value={selectedServicosComunitarios}
-              onChange={(newValue: MultiValue<any>, actionMeta: ActionMeta<any>) => {
-                if (actionMeta.action === 'select-option') {
+              onChange={(
+                newValue: MultiValue<any>,
+                actionMeta: ActionMeta<any>
+              ) => {
+                if (actionMeta.action === "select-option") {
                   setSelectedServicosComunitarios(newValue);
-                } else if (actionMeta.action === 'remove-value') {
+                } else if (actionMeta.action === "remove-value") {
                   setSelectedServicosComunitarios(newValue);
-                } else if (actionMeta.action === 'clear') {
+                } else if (actionMeta.action === "clear") {
                   setSelectedServicosComunitarios([]);
                 }
               }}
               isMulti
               placeholder="Selecione ou digite para buscar serviços comunitários"
-              />
-  
-              <label htmlFor="DataNascimento">Data de Nascimento:</label>
+            />
+
+            <label htmlFor="DataNascimento">Data de Nascimento:</label>
+            <input
+              type="date"
+              id="DataNascimento"
+              name="DataNascimento"
+              value={dados.DataNascimento}
+              onChange={handleChange}
+              required
+              max={new Date().toISOString().split("T")[0]}
+            />
+
+            <label htmlFor="nova-senha">Nova Senha:</label>
+            <div className="password-input">
               <input
-                type="date"
-                id="DataNascimento"
-                name="DataNascimento"
-                value={dados.DataNascimento}
-                onChange={handleChange}
+                type={mostrarSenha ? "text" : "password"}
+                id="nova-senha"
+                name="nova-senha"
+                placeholder="Digite sua nova senha (opcional)"
+                value={novaSenha}
+                onChange={(e) => setNovaSenha(e.target.value)}
                 required
-                max={new Date().toISOString().split("T")[0]}
               />
-  
-              <label htmlFor="nova-senha">Nova Senha:</label>
-              <div className="password-input">
-                <input
-                  type={mostrarSenha ? 'text' : 'password'}
-                  id="nova-senha"
-                  name="nova-senha"
-                  placeholder="Digite sua nova senha (opcional)"
-                  value={novaSenha}
-                  onChange={(e) => setNovaSenha(e.target.value)}
-                  required
-                />
-                <FontAwesomeIcon
-                  icon={mostrarSenha ? faEye : faEyeSlash}
-                  onClick={() => setMostrarSenha(!mostrarSenha)}
-                  className="eye-icon right-icon"
-                />
-              </div>
-  
-              <label htmlFor="confirmar-senha">Confirmar Senha:</label>
-              <div className="password-input">
-                <input
-                  type={mostrarSenha ? 'text' : 'password'}
-                  id="confirmar-senha"
-                  name="confirmar-senha"
-                  placeholder="Confirme a nova senha"
-                  value={confirmarSenha}
-                  onChange={(e) => setConfirmarSenha(e.target.value)}
-                  required
-                />
-                <FontAwesomeIcon
-                  icon={mostrarSenha ? faEye : faEyeSlash}
-                  onClick={() => setMostrarSenha(!mostrarSenha)}
-                  className="eye-icon right-icon"
-                />
-                <span className="error-message">{senhaError}</span>
-              </div>
-  
-              <button type="submit">Salvar Alterações</button>
+              <FontAwesomeIcon
+                icon={mostrarSenha ? faEye : faEyeSlash}
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                className="eye-icon right-icon"
+              />
+            </div>
+
+            <label htmlFor="confirmar-senha">Confirmar Senha:</label>
+            <div className="password-input">
+              <input
+                type={mostrarSenha ? "text" : "password"}
+                id="confirmar-senha"
+                name="confirmar-senha"
+                placeholder="Confirme a nova senha"
+                value={confirmarSenha}
+                onChange={(e) => setConfirmarSenha(e.target.value)}
+                required
+              />
+              <FontAwesomeIcon
+                icon={mostrarSenha ? faEye : faEyeSlash}
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                className="eye-icon right-icon"
+              />
+              <span className="error-message">{senhaError}</span>
+            </div>
+
+            <button type="submit">Salvar Alterações</button>
           </form>
         </div>
       </div>

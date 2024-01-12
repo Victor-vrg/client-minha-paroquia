@@ -115,8 +115,8 @@ function EditarEvento({ userAccess, servicosComunitarios }: any) {
   
   return (
     <div className="EventosWrapper">
-      <div className="EventosContainer">
-        <div className="Container-form">
+      <div className="cadastro-container">
+        <div className="cadastro-central">
           <h2>Editar Evento</h2>
           <div className="prev-next-button">
               <button onClick={goToPreviousEvento}>Evento Anterior</button>
@@ -204,7 +204,7 @@ function EditarEvento({ userAccess, servicosComunitarios }: any) {
             <div>
               <label>Descrição do Evento:</label>
               <textarea
-                className="descricaoEventotextarea"
+                className="descricaoPersonalizadatextarea"
                 name="DescricaoEvento"
                 value={evento.DescricaoEvento}
                 onChange={(e) =>

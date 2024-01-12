@@ -10,6 +10,7 @@
 .cadastro-container {
     background-color: white;
     border-radius: 1rem;
+    padding: 0 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 748px; /* Largura máxima */
     min-width: 300px; /* Largura mínima */
