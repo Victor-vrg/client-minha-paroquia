@@ -96,7 +96,6 @@ function EditarEvento({ userAccess, servicosComunitarios }: any) {
   // Função para lidar com a submissão do formulário de edição
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       // Faça uma chamada para atualizar o evento no servidor com os dados de 'evento'
       // Certifique-se de enviar a solicitação correta para atualizar o evento

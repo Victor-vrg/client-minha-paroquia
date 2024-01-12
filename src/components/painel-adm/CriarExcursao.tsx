@@ -15,7 +15,6 @@ function convertImageURL(imageURL: string) {
   if (isDriveLink) {
     return imageURL; // Se já for um link do Google Drive, retorna como está
   }
-
   // Verifica se o URL corresponde ao padrão para extrair o ID do arquivo de um link compartilhado do Google Drive
   const match = imageURL.match(/\/d\/(.+?)\//);
 

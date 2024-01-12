@@ -1,10 +1,11 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import PermissaoComponent from './PermissaoComponent';
 import api from '../../apiConfig';
+import HeaderADM from './headerADM';
 
 const authToken = sessionStorage.getItem('token');
 
-const HeaderADM = lazy(() => import('./headerADM'));
+
 const AdministrarUsuarios = lazy(() => import('./AdministrarUsuarios'));
 const AdministrarParoquia = lazy(() => import('./AdministrarParoquia'));
 const EditarPerfilUsuario = lazy(() => import('./EdicaoPerfilUsuario'));
