@@ -1,5 +1,9 @@
 .administrar-paroquia,
-.EventosWrapper,
+.EventosWrapper{
+  display: flex;
+  justify-content: center;
+  margin: 20px 18px;
+}
 .administrar-excursao {
   display: flex;
   justify-content: center;
